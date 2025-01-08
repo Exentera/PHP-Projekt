@@ -1,0 +1,82 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  /* border: 1px solid greenyellow; */
+}
+
+/* login */
+form {
+  width: 100%;
+  padding: 2em;
+  position: relative;
+ 
+
+  background-color: rgb(46, 56, 67);
+  border-top: 2px solid rgb(224, 203, 166, 0.4);
+  border-bottom: 2px solid rgb(224, 203, 166, 0.4);
+  
+}
+
+.menu {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+
+  align-items: center;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+  margin-top: -1vh;
+}
+
+nav {
+  width: 100%;
+  padding-top: 1.5vh;
+  padding-bottom: 1.5vh;
+  border-top: 2px solid rgb(224, 203, 166, 0.4);
+  border-bottom: 2px solid rgb(224, 203, 166, 0.4);
+  justify-content: space-between;
+  backdrop-filter: blur(3px);
+}
+
+ul {
+  display: flex;
+  /* padding-top: 1vh;
+  padding-bottom: 0vh; */
+  justify-content: center;
+  gap: 10vw;
+  width: 90%;
+}
+li {
+  list-style: none;
+}
+
+.menu a {
+  justify-content: center;
+  display: flex;
+  font-size: 18px;
+
+  margin: 0px;
+  color: rgb(255, 255, 255);
+  background-color: rgba(100, 100, 100, 0);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0);
+  text-decoration: none;
+  transition: all 0.4s ease;
+}
+.na1:hover {
+  color: rgb(26, 206, 246);
+}
+
+.na2:hover {
+  color: rgb(26, 206, 246);
+}
+.na3:hover {
+  color: rgb(26, 206, 246);
+}
+
+.navigation {
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+}
