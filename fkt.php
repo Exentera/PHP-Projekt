@@ -1,6 +1,6 @@
 <?php
 // db verbindung info
-    function sqlconnect(){               //
+    function sqlconnect(): bool|mysqli{               //
         $host = 'localhost';
         $dbname = 'cg';
         $username = 'root';
@@ -122,11 +122,11 @@
     }
     function verifylogin(){                     //
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $inputUsername = mysqli_real_escape_string(sqlconnect(), $_POST["name"]);
-        $inputPassword = $_POST["password"];
+            $inputUsername = mysqli_real_escape_string(sqlconnect(), $_POST["name"]);
+            $inputPassword = $_POST["password"];
 
-        $sql = "SELECT * FROM users WHERE username = '$inputUsername'";
-        $result = mysqli_query(sqlconnect(), $sql);
+            $sql = "SELECT * FROM users WHERE username = '$inputUsername'";
+            $result = mysqli_query(sqlconnect(), $sql);
 
         if (!$result) {
             die("Fehler bei der Datenbankabfrage: " . mysqli_error(sqlconnect()));
