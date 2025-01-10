@@ -1,5 +1,11 @@
 @import url("https://fonts.cdnfonts.com/css/auto-mode");
 @import url("https://fonts.cdnfonts.com/css/neonize");
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  /* border: 1px solid greenyellow; */
+}
 
 body {
   background-color: rgb(0, 0, 0);
@@ -12,7 +18,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 95.8vh;
+  height: 95.4vh;
 
   background: url(MVOE.gif);
   -webkit-background-clip: text;
@@ -53,7 +59,7 @@ h1 {
 
 main {
   margin: 0px;
-  padding: 4vw;
+  padding: 0px;
   background-color: rgb(32, 37, 42);
 }
 
@@ -78,19 +84,19 @@ div.card {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: width 0.5s ease;
+  /* transition: width 0.5s ease; */
 }
 
-.card:hover {
+/* .card:hover {
   width: 225px;
-}
+} */
 
 footer {
   height: 10vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 4vw;
+  margin: 0px;
 }
 
 footer a {

@@ -1,7 +1,6 @@
 <?php
   include ("fkt.php");
-  generate_header('WILKOMMEN');
-  close_header();
+  generate_header('IMPREESUM');
   generate_navbar();
 ?>
 
@@ -47,9 +46,10 @@
 
 
     <div class="cards">
-      <div class="card">div card 1</div>
-      <div class="card">div card 2</div>
-      <div class="card">div card 4</div>
+      <div class="card">div 1</div>
+      <div class="card">div 2</div>
+      <div class="card">div 3</div>
+      <div class="card">div 4</div>
     </div>
 
           <section>
