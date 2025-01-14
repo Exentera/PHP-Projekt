@@ -29,7 +29,7 @@ body {
   background-position-y: 52%;
 }
 
-header {
+.header1 {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,16 +67,16 @@ h2 {
   color: rgb(237, 184, 97);
 }
 
-div.cards {
+/* div.cards {
   display: flex;
   flex-wrap: wrap;
 
   justify-content: center;
   gap: 4vw;
   padding: 4vw;
-}
+} */
 
-div.card {
+/* .card {
   background-color: rgb(46, 56, 67);
   border-radius: 20px;
   width: 200px;
@@ -84,8 +84,8 @@ div.card {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* transition: width 0.5s ease; */
-}
+  transition: width 0.5s ease;
+} */
 
 /* .card:hover {
   width: 225px;

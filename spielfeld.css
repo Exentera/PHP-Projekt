@@ -1,0 +1,145 @@
+/* *{
+    border: 1px solid greenyellow;
+} */
+
+
+.spiel{
+    width: 100%;
+    /* height: 100%; */
+}
+
+.grid-container {
+    display: grid;
+    /* gap: 5px; */
+    background-color: rgb(32, 37, 42);
+    padding: 2.5px 5px;
+}
+.grid-container > div {
+    background-color: rgb(46, 56, 67);
+    text-align: center;
+    font-size: 20px;
+}
+
+.statusanzeige{
+    height: 7.5vh;
+    grid-template-columns: 40% 20% 40%;
+}
+
+.turndiv{
+    height: 7.5vh;
+    grid-template-columns: 40% 20% 40%;
+}
+
+.spielfeld{
+    height: 44vh;
+    grid-template-columns: 40% 20% 40%
+}
+
+.info{
+    height: 5vh;
+    grid-template-columns: 40% 20% 40%;
+}
+
+
+
+.hand{
+    height: 30vh;
+    grid-template-columns: 10% 16% 16% 16% 16% 16% 10%;
+    
+    
+}
+.card{
+    height: 28vh;
+    width: 10vw;
+    border-radius: 20px;
+    background-color: rgb(32, 37, 42);
+    margin: auto;
+    margin-top: 1vh;
+    padding: 1vh;   
+}
+.cardheader{
+    height: 3vh;
+    display: grid;
+    background-color: rgb(51, 77, 105);
+    grid-template-columns: 50% 50%;
+}
+.cardname{
+    text-align: left;
+}
+.cardenergie{
+    text-align: right;
+}
+
+.img_container{
+    display: grid;
+    background-color: rgb(25, 48, 72);
+    grid-template-columns: 100%;
+    height: 12vh;
+}
+
+.eff{
+    display: grid;
+    background-color: rgb(2, 51, 102);
+    grid-template-columns: 100%;
+    height: 3.4vh; 
+}
+
+
+
+
+
+
+
+.gamemenu {
+  padding: 0px;
+  width: 100%;
+  /* position: -webkit-sticky; */
+  /* position: sticky; */
+  /* top: 0; */
+
+  align-items: center;
+  display: grid;
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+  margin-top: 0vh;
+}
+.gamemenu a {
+  justify-content: center;
+  display: flex;
+  font-size: 18px;
+
+  margin: 0px;
+  color: rgb(255, 255, 255);
+  background-color: rgba(100, 100, 100, 0);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0);
+  text-decoration: none;
+  transition: all 0.4s ease;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* .spielfeld{
+    height: 95.4vh;
+} */
+
+/* .statusanzeige{
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.flex40{
+    width: 40%;
+}
+.flex20{
+    width: 20%;
+} */

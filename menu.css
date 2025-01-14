@@ -6,7 +6,7 @@
 }
 
 /* login */
-form {
+.formlogin {
   z-index: 99;
   width: 100%;
   padding: 2px;

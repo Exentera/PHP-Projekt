@@ -1,6 +1,76 @@
 <?php
     include ("fkt.php");
-    generate_header('NOOOOOOB<br>NOOOOOOB<br>NOOOOOOB');
+    session_start();
+    check_game_id();
+    // generate_header('NOOOOOOB<br>NOOOOOOB<br>NOOOOOOB');
+    echo '
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Index</title>
+
+            <link rel="stylesheet" href="menu.css" />
+            <link rel="stylesheet" href="main.css" />
+            <link rel="stylesheet" href="spielfeld.css" />
+
+            <link href="https://fonts.cdnfonts.com/css/auto-mode" rel="stylesheet">
+            <link href="https://fonts.cdnfonts.com/css/neonize" rel="stylesheet">
+        </head>
+
+        <body>
+            <header class="spiel">
+
+                <div class="statusanzeige grid-container">
+                    <div>
+                        <div class="p1leben">Leben</div>
+                    </div>
+                    <div>
+                        <div class="zugnummer">'.turn_nr().'</div>
+                    </div>
+                    <div>
+                        <div class="p2leben">Leben</div>
+                    </div>
+                </div>
+
+                <div class="turndiv grid-container">
+                    <div></div>
+                    <div class="zugbutton">';
+                        turn_button();
+                        echo 
+                    '</div>
+                    <div></div>
+                </div>
+
+                <div class="spielfeld grid-container">
+                    <div class="p1img">Bild 1</div>
+                    <div class="log">Spiellog</div>
+                    <div class="p2img">Bild 2</div>
+                </div>
+
+                <div class="info grid-container">
+                    <div class="deck">Deck</div>
+                    <div class="turninfo">'.turn_who().'</div>
+                    <div class="ablagestapel">Ablagestapel</div>
+                </div>
+
+                <div class="hand grid-container">
+                    <div></div>
+                    '.card().'
+                    '.card().'
+                    '.card().'
+                    '.card().'
+                    '.card().'
+                    <div></div>
+                </div>
+
+            </header>
+        </body>'
+    ;
+
+
+
     sqlconnect();
 
 
@@ -8,57 +78,11 @@
     function check_game_id(){ //test id generieren
         return 1;
     }
-    check_game_id();
+    
 
 
-    function turn(){
-
-        $game_id = check_game_id();
-        if (isset($_POST['end_turn']) && $_POST['end_turn'] == 'ZugBeenden') {
-            
-            $sql_next_turn = 
-                'UPDATE game_sessions
-                SET turn = turn + 1
-                WHERE game_id = '.$game_id.';'
-            ;
-
-            mysqli_query(sqlconnect(), $sql_next_turn);
-            header("Location: gamesession.php"); 
-        }
-
-        $sql_turn = 
-            'SELECT turn 
-            FROM game_sessions 
-            WHERE game_id = '.$game_id.';'
-        ;
-
-        $result = mysqli_query(sqlconnect(),$sql_turn);
-        $turn = mysqli_fetch_array($result);
-
-        if($turn['turn'] % 2 == 1){
-            echo '<div class="login_position">
-                <form class="menu" action="gamesession.php" method="POST">
-                    <input type="hidden" name="end_turn" value="ZugBeenden">
-                    <input type="submit" value="Zug Beenden">
-                </form>    
-                <p> Du bist am zug! </p>
-                <p>Zug '.$turn['turn'].'</p>
-            </div>'; 
-        }
-        else{
-            echo '<div class="login_position">
-                <form class="menu" action="gamesession.php" method="POST">
-                    <input type="hidden" name="end_turn" value="ZugBeenden">
-                    <input type="submit" value="Zug Beenden">
-                </form>                
-                <p> Der Gegner ist am zug! </p>
-                <p>Zug '.$turn['turn'].'</p>
-            </div>';
-        }
-    }
-    turn();
      
-    generate_navbar();
+    gamesession_navbar();
     close_header();
-    generate_footer();
+    // generate_footer();
     close_html();
