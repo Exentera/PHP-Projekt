@@ -55,16 +55,9 @@
                     <div class="ablagestapel">Ablagestapel</div>
                 </div>
 
-                <div class="hand grid-container">
-                    <div></div>
-                    '.card().'
-                    '.card().'
-                    '.card().'
-                    '.card().'
-                    '.card().'
-                    <div></div>
-                </div>
-
+                <div class="hand grid-container">';
+                    draw();
+                echo '</div>
             </header>
         </body>'
     ;

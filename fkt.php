@@ -324,8 +324,10 @@
     }
 
 
+ 
+
     function card(){
-    return  
+    echo  
         '<div>
             <div class="card">
                 <div class="cardheader">
@@ -350,6 +352,23 @@
             
         </div>';
     }
-
+    function draw(){
+        $game_id = check_game_id();
+        $sql_turn = 
+            'SELECT turn 
+            FROM game_sessions 
+            WHERE game_id = '.$game_id.';'
+        ;
+        $result = mysqli_query(sqlconnect(),$sql_turn);
+        $turn = mysqli_fetch_array($result);
+        
+        if($turn['turn'] % 2 == 1){
+            echo '<div></div>';
+            for($i=0;$i<5;$i++){
+               card();
+            };
+            echo '<div></div>';
+        }
+    }
 
 ?>
