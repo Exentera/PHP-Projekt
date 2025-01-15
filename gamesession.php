@@ -24,13 +24,19 @@
 
                 <div class="statusanzeige grid-container">
                     <div>
-                        <div class="p1leben">Leben</div>
+                        <div  class="health">
+                            <p>'.healthbar('p1_health').' / '.healthbar_max('p1_max_health').'</p>
+                            <div class="healthgreen" style="width:46%"></div>
+                        </div>
                     </div>
                     <div>
                         <div class="zugnummer">'.turn_nr().'</div>
                     </div>
                     <div>
-                        <div class="p2leben">Leben</div>
+                        <div  class="health">
+                            <p>'.healthbar('p2_health').' / '.healthbar_max('p2_max_health').'</p>
+                            <div class="healthgreen" style="width:25%;"></div>
+                        </div>
                     </div>
                 </div>
 

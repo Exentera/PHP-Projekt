@@ -1,6 +1,6 @@
 <?php
   include ("fkt.php");
-  generate_header('WILKOMMEN');
+  generate_header('WILLKOMMEN');
   close_header();
   generate_navbar();
 ?>
