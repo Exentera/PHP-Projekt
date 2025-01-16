@@ -83,7 +83,7 @@
 }
 .card{
     height: 28vh;
-    width: 10vw;
+    width: 9vw;
     border-radius: 20px;
     border: 4px black solid;
     background-color: rgb(51, 77, 105);
@@ -110,6 +110,7 @@
     background-color: rgb(25, 48, 72);
     grid-template-columns: 100%;
     height: 12vh;
+    
 
 }
 .img_container {

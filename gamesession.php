@@ -51,7 +51,7 @@
 
                 <div class="spielfeld grid-container">
                     <div class="p1img">Bild 1</div>
-                    <div class="log">Spiellog</div>
+                    <div class="log">'.count_deck_p1().'<br>'.count_deck_p2().'</div>
                     <div class="p2img">Bild 2</div>
                 </div>
 

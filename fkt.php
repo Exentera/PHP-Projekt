@@ -12,12 +12,6 @@
         }
         return $con;
     }
-
-    function check_game_id(){ //test id generieren
-    return 1;
-    }
-
-
 // html
     function generate_header($überschrift) {    //
         // Starte die PHP-Session, um auf die Session-Daten zugreifen zu können
@@ -136,13 +130,10 @@
             </footer>
         ';
     }
-
     function close_html(){                      //
     echo '</body>
         </html>';
     }  
-
-
 // account
     function login_html() {                     //
         echo ' <div class="login_position">
@@ -240,103 +231,103 @@
     }
 
 
-    // function turn_button() {
-    // $game_id = check_game_id();
+    function turn_button() {
+    $game_id = check_game_id();
 
-    // if (isset($_POST['end_turn']) && $_POST['end_turn'] == 'ZugBeenden') {
-    //     // Ermittle den aktuellen Spieler basierend auf dem Zug
-    //     $sql_current_player = 
-    //         'SELECT 
-    //             CASE 
-    //                 WHEN turn % 2 = 1 THEN player1_id
-    //                 ELSE player2_id
-    //             END AS current_player
-    //         FROM game_sessions
-    //         WHERE game_id = '.$game_id.';';
-    //     $result = mysqli_query(sqlconnect(), $sql_current_player);
-    //     $current_player = mysqli_fetch_array($result)['current_player'];
-
-    //     // Verschiebe die 5 aktiven Karten in den Ablagestapel
-    //     $sql_move_to_discard = 
-    //         'INSERT INTO discard_pile (game_id, card_id, discarded_at)
-    //         SELECT 
-    //             game_id,
-    //             card_id,
-    //             NOW() AS discarded_at
-    //         FROM 
-    //             game_deck
-    //         WHERE 
-    //             game_id = '.$game_id.'
-    //             AND user_id = '.$current_player.'
-    //             AND is_active = 1
-    //         ORDER BY 
-    //             position ASC
-    //         LIMIT 5;';
-    //     mysqli_query(sqlconnect(), $sql_move_to_discard);
-
-    //     // Setze die Karten, die in den Ablagestapel verschoben wurden, auf inaktiv
-    //     $sql_deactivate_cards = 
-    //         'UPDATE game_deck
-    //         SET is_active = 0
-    //         WHERE game_id = '.$game_id.'
-    //           AND user_id = '.$current_player.'
-    //           AND is_active = 1
-    //           AND card_id IN (
-    //               SELECT card_id
-    //               FROM (
-    //                   SELECT card_id
-    //                   FROM game_deck
-    //                   WHERE game_id = '.$game_id.'
-    //                     AND user_id = '.$current_player.'
-    //                     AND is_active = 1
-    //                   ORDER BY position ASC
-    //                   LIMIT 5
-    //               ) AS temp_table
-    //           );';
-    //     mysqli_query(sqlconnect(), $sql_deactivate_cards);
-
-    //     // Erhöhe den Zugzähler
-    //     $sql_next_turn = 
-    //         'UPDATE game_sessions
-    //         SET turn = turn + 1
-    //         WHERE game_id = '.$game_id.';';
-    //     mysqli_query(sqlconnect(), $sql_next_turn);
-
-    //     // Leite zur aktuellen Seite weiter
-    //     header("Location: gamesession.php");
-    //     exit;
-    // }
-
-    // // Ermittle den aktuellen Zug
-    // $sql_turn = 
-    //     'SELECT turn 
-    //     FROM game_sessions 
-    //     WHERE game_id = '.$game_id.';';
-    // $result = mysqli_query(sqlconnect(), $sql_turn);
-    // $turn = mysqli_fetch_array($result);
-
-    // // Zeige die entsprechende Schaltfläche an
-    // if ($turn['turn'] % 2 == 1) {
-    //     // Spielerzug
-    //     echo '<div class="zugbutton">
-    //         <form class="" action="gamesession.php" method="POST">
-    //             <input type="hidden" name="end_turn" value="ZugBeenden">
-    //             <input type="submit" value="Zug Beenden">
-    //         </form>
-    //     </div>'; 
-    // } else {
-    //     // Computerzug
-    //     echo '<div class="zugbutton">
-    //         <form class="" action="gamesession.php" method="POST">
-    //             <input type="hidden" name="end_turn" value="ZugBeenden">
-    //             <input type="submit" value="Com Zug Beenden">
-    //         </form>
-    //     </div>';
-    // }
-    // }
+    if (isset($_POST['end_turn']) && $_POST['end_turn'] == 'ZugBeenden') {
+        // Ermittle den aktuellen Spieler basierend auf dem Zug
+        $sql_current_player = 
+            'SELECT 
+                CASE 
+                    WHEN turn % 2 = 1 THEN player1_id
+                    ELSE player2_id
+                END AS current_player
+            FROM game_sessions
+            WHERE game_id = '.$game_id.';';
+        $result = mysqli_query(sqlconnect(), $sql_current_player);
+        $current_player = mysqli_fetch_array($result)['current_player'];
 
 
 
+
+        // Verschiebe die 5 aktiven Karten in den Ablagestapel
+        $sql_move_to_discard = 
+            'INSERT INTO discard_pile (game_id, card_id, discarded_at)
+            SELECT 
+                game_id,
+                card_id,
+                NOW() AS discarded_at
+            FROM 
+                game_deck
+            WHERE 
+                game_id = '.$game_id.'
+                AND user_id = '.$current_player.'
+                AND is_active = 1
+            ORDER BY 
+                position ASC
+            LIMIT 5;';
+        mysqli_query(sqlconnect(), $sql_move_to_discard);
+
+        // Setze die Karten, die in den Ablagestapel verschoben wurden, auf inaktiv
+        $sql_deactivate_cards = 
+            'UPDATE game_deck
+            SET is_active = 0
+            WHERE game_id = '.$game_id.'
+              AND user_id = '.$current_player.'
+              AND is_active = 1
+              AND card_id IN (
+                  SELECT card_id
+                  FROM (
+                      SELECT card_id
+                      FROM game_deck
+                      WHERE game_id = '.$game_id.'
+                        AND user_id = '.$current_player.'
+                        AND is_active = 1
+                      ORDER BY position ASC
+                      LIMIT 5
+                  ) AS temp_table
+              );';
+        mysqli_query(sqlconnect(), $sql_deactivate_cards);
+
+        //Zugzähler++
+        $sql_next_turn = 
+            'UPDATE game_sessions
+            SET turn = turn + 1
+            WHERE game_id = '.$game_id.';';
+        mysqli_query(sqlconnect(), $sql_next_turn);
+
+        
+        header("Location: gamesession.php");
+        exit;
+    }
+
+    //Aktuellen Zug
+    $sql_turn = 
+        'SELECT turn 
+        FROM game_sessions 
+        WHERE game_id = '.$game_id.';';
+    $result = mysqli_query(sqlconnect(), $sql_turn);
+    $turn = mysqli_fetch_array($result);
+
+    // Zeige die entsprechende Schaltfläche an
+    if ($turn['turn'] % 2 == 1) {
+        // Spielerzug
+        echo '<div class="zugbutton">
+            <form class="" action="gamesession.php" method="POST">
+                <input type="hidden" name="end_turn" value="ZugBeenden">
+                <input type="submit" value="Zug Beenden">
+            </form>
+        </div>'; 
+    } else {
+        // Computerzug
+        echo '<div class="zugbutton">
+            <form class="" action="gamesession.php" method="POST">
+                <input type="hidden" name="end_turn" value="ZugBeenden">
+                <input type="submit" value="Com Zug Beenden">
+            </form>
+        </div>';
+    }
+    }
     function turn_who(){
     $game_id = check_game_id();
     $sql_turn = 
@@ -449,11 +440,33 @@
         $deck = mysqli_fetch_array($result);
         return $deck;
     }
+    function load_deck_player1(){     
+    $sql = '
+    INSERT INTO game_deck (game_id, card_id, position, is_active, user_id)
+    SELECT 
+        game_sessions.game_id,
+        deck_cards.card_id,
+        ROW_NUMBER() OVER (PARTITION BY users.user_id ORDER BY RAND()) AS position,
+        1 AS is_active,
+        users.user_id
+    FROM 
+        game_sessions
+    JOIN 
+        users ON users.user_id = game_sessions.player1_id
+    JOIN 
+        decks ON decks.user_id = users.user_id
+    JOIN 
+        deck_cards ON deck_cards.deck_id = decks.deck_id
+    WHERE 
+        game_sessions.game_id = 1;
+    ';
 
-    function load_deck_p1_p2($game_deck_load){      //ladet und mischt das deck für die spieler 
-
-        $sql= 
-        'INSERT INTO game_deck (game_id, card_id, position, is_active, user_id)
+    mysqli_query(sqlconnect(), $sql);
+    
+    }
+    function load_deck_player2(){     
+        $sql = '
+        INSERT INTO game_deck (game_id, card_id, position, is_active, user_id)
         SELECT 
             game_sessions.game_id,
             deck_cards.card_id,
@@ -463,7 +476,7 @@
         FROM 
             game_sessions
         JOIN 
-            users ON users.user_id IN (game_sessions.player1_id, game_sessions.player2_id)
+            users ON users.user_id = game_sessions.player2_id
         JOIN 
             decks ON decks.user_id = users.user_id
         JOIN 
@@ -472,9 +485,11 @@
             game_sessions.game_id = 1;
         ';
 
-        $result = mysqli_query(sqlconnect(),$sql);
-        $deck = mysqli_fetch_array($result);
+        mysqli_query(sqlconnect(), $sql);
+        
     }
+
+
     
     function delete_game_deck(){       
         $sql= 
@@ -484,8 +499,6 @@
 
         $result = mysqli_query(sqlconnect(),$sql);
     }
-
-
 
     //     function discard_pile(){
 
@@ -514,6 +527,84 @@
     //     $result = mysqli_query(sqlconnect(),$sql);
     //     $pile = mysqli_fetch_array($result);
     // }
+
+    
+    
+    function count_deck_p1(){
+        $game_id = check_game_id();
+        $sql = 
+            'SELECT 
+                SUM(game_deck.is_active) AS restdeck
+            FROM 
+                game_deck
+            JOIN 
+                cards ON cards.card_id = game_deck.card_id
+            WHERE 
+                game_deck.game_id = 1
+                AND game_deck.user_id = (SELECT player1_id FROM game_sessions WHERE game_id = 1);
+        ';
+
+        $result = mysqli_query(sqlconnect(),$sql);
+        $deck_sum = mysqli_fetch_array($result);
+
+        return $deck_sum['restdeck'] ;
+    }
+
+    function shuffle_draw_p1(){
+        if(count_deck_p1() < 5){
+            $game_id = check_game_id();
+            $sql = 
+                'DELETE FROM 
+                    game_deck
+                WHERE 
+                    game_deck.game_id = ' . $game_id . '
+                    AND game_deck.user_id = (SELECT player1_id FROM game_sessions WHERE game_id = ' . $game_id . ')';
+            
+            mysqli_query(sqlconnect(), $sql);
+            
+            load_deck_player1();
+        }
+
+    }
+    function count_deck_p2(){
+        $game_id = check_game_id();
+        $sql = 
+            'SELECT 
+                SUM(game_deck.is_active) AS restdeck
+            FROM 
+                game_deck
+            JOIN 
+                cards ON cards.card_id = game_deck.card_id
+            WHERE 
+                game_deck.game_id = 1
+                AND game_deck.user_id = (SELECT player2_id FROM game_sessions WHERE game_id = 1);
+        ';
+
+        $result = mysqli_query(sqlconnect(),$sql);
+        $deck_sum = mysqli_fetch_array($result);
+
+        return $deck_sum['restdeck'] ;
+    }
+
+    function shuffle_draw_p2(){
+        if(count_deck_p2() < 5){
+            $game_id = check_game_id();
+            $sql = 
+                'DELETE FROM 
+                    game_deck
+                WHERE 
+                    game_deck.game_id = ' . $game_id . '
+                    AND game_deck.user_id = (SELECT player2_id FROM game_sessions WHERE game_id = ' . $game_id . ')';
+            
+            mysqli_query(sqlconnect(), $sql);
+            
+            load_deck_player2();
+        }
+
+    }
+
+
+
 
     function card() {
     $sql_draw = 
@@ -560,7 +651,6 @@
             </div>';
     }
 }
-
     function draw(){
         $game_id = check_game_id();
         $sql_turn = 
@@ -572,206 +662,18 @@
         $turn = mysqli_fetch_array($result);
         
         if($turn['turn'] % 2 == 1){
+            shuffle_draw_p1();
             echo '<div></div>';
+
 
             card();
  
             echo '<div></div>';
         }
         else{
-
+            shuffle_draw_p2();
         }
     }
-
-
-
-
-
-    // Funktion: Ziehe Karten und aktualisiere Deck und Ablagestapel
-    function draw_and_shuffle($game_id, $current_player) {
-        $max_hand_cards = 5;
-
-        // Versuche, Karten zu aktivieren (bis zum Limit von 5 Karten)
-        $sql_activate_cards = 
-            'UPDATE game_deck
-            SET is_active = 1
-            WHERE game_id = '.$game_id.'
-            AND user_id = '.$current_player.'
-            AND is_active = 0
-            ORDER BY position ASC
-            LIMIT '.$max_hand_cards.';';
-        mysqli_query(sqlconnect(), $sql_activate_cards);
-
-        // Ermittle verbleibende inaktive Karten im Deck
-        $sql_inactive_count = 
-            'SELECT COUNT(*) AS inactive_count
-            FROM game_deck
-            WHERE game_id = '.$game_id.'
-            AND user_id = '.$current_player.'
-            AND is_active = 0;';
-        $result = mysqli_query(sqlconnect(), $sql_inactive_count);
-        $inactive_count = mysqli_fetch_array($result)['inactive_count'];
-
-        // Falls nicht genug Karten im Deck vorhanden sind, mische den Ablagestapel ins Deck
-        if ($inactive_count < $max_hand_cards) {
-            // Bestimme die aktuelle maximale Position im Deck
-            $sql_max_position = 
-                'SELECT COALESCE(MAX(position), 0) AS max_position
-                FROM game_deck
-                WHERE game_id = '.$game_id.'
-                AND user_id = '.$current_player.';';
-            $result = mysqli_query(sqlconnect(), $sql_max_position);
-            $max_position = mysqli_fetch_array($result)['max_position'];
-
-            // Mische Karten aus dem Ablagestapel ins Deck
-            $sql_shuffle_discard_pile = 
-                'INSERT INTO game_deck (game_id, card_id, user_id, position, is_active)
-                SELECT 
-                    game_id,
-                    card_id,
-                    user_id,
-                    ROW_NUMBER() OVER (ORDER BY RAND()) + '.$max_position.' AS new_position,
-                    0 AS is_active
-                FROM discard_pile
-                WHERE game_id = '.$game_id.'
-                AND user_id = '.$current_player.';';
-            mysqli_query(sqlconnect(), $sql_shuffle_discard_pile);
-
-            // Entferne die gemischten Karten aus dem Ablagestapel
-            $sql_delete_discard_pile = 
-                'DELETE FROM discard_pile
-                WHERE game_id = '.$game_id.'
-                AND user_id = '.$current_player.';';
-            mysqli_query(sqlconnect(), $sql_delete_discard_pile);
-
-            // Versuche erneut, Karten zu aktivieren, nachdem der Ablagestapel gemischt wurde
-            $sql_reactivate_cards = 
-                'UPDATE game_deck
-                SET is_active = 1
-                WHERE game_id = '.$game_id.'
-                AND user_id = '.$current_player.'
-                AND is_active = 0
-                ORDER BY position ASC
-                LIMIT '.$max_hand_cards.';';
-            mysqli_query(sqlconnect(), $sql_reactivate_cards);
-        }
-    }
-    // Funktion: Verschiebe Karten in den Ablagestapel
-    function update_discard_pile($game_id, $current_player) {
-        // Verschiebe die 5 aktiven Karten in den Ablagestapel
-        $sql_move_to_discard = 
-            'INSERT INTO discard_pile (game_id, card_id, user_id, discarded_at)
-            SELECT 
-                game_id,
-                card_id,
-                user_id,
-                NOW() AS discarded_at
-            FROM 
-                game_deck
-            WHERE 
-                game_id = '.$game_id.'
-                AND user_id = '.$current_player.'
-                AND is_active = 1
-            ORDER BY 
-                position ASC
-            LIMIT 5;';
-        mysqli_query(sqlconnect(), $sql_move_to_discard);
-
-        // Setze die Karten, die in den Ablagestapel verschoben wurden, auf inaktiv
-        $sql_deactivate_cards = 
-            'UPDATE game_deck
-            SET is_active = 0
-            WHERE game_id = '.$game_id.'
-            AND user_id = '.$current_player.'
-            AND is_active = 1
-            AND card_id IN (
-                SELECT card_id
-                FROM (
-                    SELECT card_id
-                    FROM game_deck
-                    WHERE game_id = '.$game_id.'
-                        AND user_id = '.$current_player.'
-                        AND is_active = 1
-                    ORDER BY position ASC
-                    LIMIT 5
-                ) AS temp_table
-            );';
-        mysqli_query(sqlconnect(), $sql_deactivate_cards);
-    }
-    // Funktion: Ermittle den aktuellen Spieler und erhöhe den Zugzähler
-    function get_current_player_and_advance_turn($game_id) {
-        $sql_current_player = 
-            'SELECT 
-                CASE 
-                    WHEN turn % 2 = 1 THEN player1_id
-                    ELSE player2_id
-                END AS current_player
-            FROM game_sessions
-            WHERE game_id = '.$game_id.';';
-        $result = mysqli_query(sqlconnect(), $sql_current_player);
-        $current_player = mysqli_fetch_array($result)['current_player'];
-
-        // Erhöhe den Zugzähler
-        $sql_next_turn = 
-            'UPDATE game_sessions
-            SET turn = turn + 1
-            WHERE game_id = '.$game_id.';';
-        mysqli_query(sqlconnect(), $sql_next_turn);
-
-        return $current_player;
-    }
-    // Hauptfunktion: Zug-Button
-    function turn_button() {
-        $game_id = check_game_id();
-
-        if (isset($_POST['end_turn']) && $_POST['end_turn'] == 'ZugBeenden') {
-            // Ermittle den aktuellen Spieler und erhöhe den Zugzähler
-            $current_player = get_current_player_and_advance_turn($game_id);
-
-            // Verschiebe Karten in den Ablagestapel
-            update_discard_pile($game_id, $current_player);
-
-            // Ziehe Karten und mische den Ablagestapel ins Deck
-            draw_and_shuffle($game_id, $current_player);
-
-            // Leite zur aktuellen Seite weiter
-            header("Location: gamesession.php");
-            exit;
-        }
-
-        // Ermittle den aktuellen Zug
-        $sql_turn = 
-            'SELECT turn 
-            FROM game_sessions 
-            WHERE game_id = '.$game_id.';';
-        $result = mysqli_query(sqlconnect(), $sql_turn);
-        $turn = mysqli_fetch_array($result);
-
-        // Zeige die entsprechende Schaltfläche an
-        if ($turn['turn'] % 2 == 1) {
-            // Spielerzug
-            echo '<div class="zugbutton">
-                <form action="gamesession.php" method="POST">
-                    <input type="hidden" name="end_turn" value="ZugBeenden">
-                    <input type="submit" value="Zug Beenden">
-                </form>
-            </div>'; 
-        } else {
-            // Computerzug
-            echo '<div class="zugbutton">
-                <form action="gamesession.php" method="POST">
-                    <input type="hidden" name="end_turn" value="ZugBeenden">
-                    <input type="submit" value="Com Zug Beenden">
-                </form>
-            </div>';
-        }
-    }
-
-
-
-
-
-
 
 
     function healthbar($player){
@@ -785,5 +687,16 @@
         $result = mysqli_query(sqlconnect(), $sql);
         $health = mysqli_fetch_array($result);
         return $health[$player];
+    }
+
+
+
+
+
+
+
+
+    function check_game_id(){ //test id generieren
+        return 1;
     }
 ?>
