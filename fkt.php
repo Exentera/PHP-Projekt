@@ -629,28 +629,45 @@
         LIMIT 5;';
 
     $result = mysqli_query(sqlconnect(), $sql_draw);
+    
+    // $_GET["active"];
+    // $_GET["cardId"];
+    $hand_id=1;
 
     while ($row = mysqli_fetch_assoc($result)) {
         echo  
-            '<div>
-                <div class="card">
-                    <div class="cardheader">
-                        <div class="cardname">' .$row['card_name'] . '</div>
-                        <div class="cardenergie">' . $row['energy_cost'] . '</div>
-                    </div>
-                    <div>
-                        <div class="img_container">
-                            <img src="' . $row['URL'] . '" alt="404">
+            '   <div class="box"> 
+                <a clas="pointer test" href="gamesession.php?active=true&cardId='.$hand_id.'">
+                    <div class="card">
+                        <div class="cardheader">
+                            <div class="cardname">' .$row['card_name'] . '</div>
+                            <div class="cardenergie">' . $row['energy_cost'] . '</div>
                         </div>
+                        <div>
+                            <div class="img_container">
+                                <img src="' . $row['URL'] . '" alt="404">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="eff">ATK: ' . $row['ATK'] . '</div>
+                            <div class="eff">DEF: ' . $row['DEF'] . '</div>
+                        </div>                                    
                     </div>
-                    <div>
-                        <div class="eff">ATK: ' . $row['ATK'] . '</div>
-                        <div class="eff">DEF: ' . $row['DEF'] . '</div>
-                    </div>                                    
-                </div>        
-            </div>';
+
+                    <form class="card c'.$hand_id.'" method="post">
+                    </form> 
+                </a>         
+                </div>
+            ';
+            $hand_id++;
     }
+    
 }
+function cardClicked() {
+    echo "Karte wurde angeklickt!";
+    }
+
+
     function draw(){
         $game_id = check_game_id();
         $sql_turn = 

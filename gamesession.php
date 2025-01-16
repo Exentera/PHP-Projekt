@@ -26,7 +26,7 @@
                     <div>
                         <div  class="health">
                             <p>'.healthbar('p1_health').' / '.healthbar_max('p1_max_health').'</p>
-                            <div class="healthgreen" style="width:'.healthbar('p1_health').'%"></div>
+                            <div class="healthgreen" style="width:'.$p1health=healthbar('p1_health')/(healthbar_max('p1_max_health')/100).'%"></div>
                         </div>
                     </div>
                     <div>
@@ -35,7 +35,7 @@
                     <div>
                         <div  class="health">
                             <p>'.healthbar('p2_health').' / '.healthbar_max('p2_max_health').'</p>
-                            <div class="healthgreen" style="width:'.healthbar('p2_health').'%"></div>
+                            <div class="healthgreen" style="width:'.$p2health=healthbar('p2_health')/(healthbar_max('p2_max_health')/100).'%"></div>
                         </div>
                     </div>
                 </div>
