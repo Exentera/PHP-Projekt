@@ -36,7 +36,8 @@
     
 }
 .health>p{
- 
+    position: relative;
+    z-index: 9;
 }
 
 .healthgreen{
