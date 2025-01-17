@@ -1,5 +1,5 @@
 <?php
-// db verbindung info
+//db verbindung info
     function sqlconnect(): bool|mysqli{               //
         $host = 'localhost';
         $dbname = 'cg';
@@ -12,12 +12,10 @@
         }
         return $con;
     }
-// html
+//html
     function generate_header($überschrift) {    //
-        // Starte die PHP-Session, um auf die Session-Daten zugreifen zu können
         session_start();
         
-        // HTML-Ausgabe für den Header und Navigation
         echo '
         <!DOCTYPE html>
         <html lang="en">
@@ -66,6 +64,9 @@
             echo "<li>";
             echo "<a class='na3' href='logout.php'>Logout</a>";
             echo "</li>";
+            echo "<li>";
+            echo "<a class='na3' href='gamesession.php'>Spiel</a>";
+            echo "</li>";
         } else {
             // Benutzer ist nicht eingeloggt, zeige Login-Link
             echo "<li>";
@@ -77,7 +78,7 @@
                 </nav>
             </div>';
     }
-    function gamesession_navbar() {                //
+    function gamesession_navbar() {             //
         echo '<div class="gamemenu">
 
                 <nav class="navigation" id="home">
@@ -230,7 +231,6 @@
 
     }
 
-
     function turn_button() {
     $game_id = check_game_id();
 
@@ -250,7 +250,7 @@
 
 
 
-        // Verschiebe die 5 aktiven Karten in den Ablagestapel
+        
         $sql_move_to_discard = 
             'INSERT INTO discard_pile (game_id, card_id, discarded_at)
             SELECT 
@@ -309,13 +309,12 @@
     $result = mysqli_query(sqlconnect(), $sql_turn);
     $turn = mysqli_fetch_array($result);
 
-    // Zeige die entsprechende Schaltfläche an
     if ($turn['turn'] % 2 == 1) {
         // Spielerzug
-        echo '<div class="zugbutton">
+        echo '<div >
             <form class="" action="gamesession.php" method="POST">
-                <input type="hidden" name="end_turn" value="ZugBeenden">
-                <input type="submit" value="Zug Beenden">
+                <input class="zugbutton" type="hidden" name="end_turn" value="ZugBeenden">
+                <input class="zugbutton" type="submit" value="Zug Beenden">
             </form>
         </div>'; 
     } else {
@@ -373,9 +372,6 @@
             </div>';
         }
     }
-
-
-     
     function load_game_deck_info_p1($game_deck_info){
 
         $sql= 
@@ -488,9 +484,6 @@
         mysqli_query(sqlconnect(), $sql);
         
     }
-
-
-    
     function delete_game_deck(){       
         $sql= 
         'DELETE FROM game_deck
@@ -499,8 +492,7 @@
 
         $result = mysqli_query(sqlconnect(),$sql);
     }
-
-    //     function discard_pile(){
+    // function discard_pile(){
 
     //     $sql= 
     //     'SELECT 
@@ -528,8 +520,6 @@
     //     $pile = mysqli_fetch_array($result);
     // }
 
-    
-    
     function count_deck_p1(){
         $game_id = check_game_id();
         $sql = 
@@ -549,7 +539,6 @@
 
         return $deck_sum['restdeck'] ;
     }
-
     function shuffle_draw_p1(){
         if(count_deck_p1() < 5){
             $game_id = check_game_id();
@@ -585,7 +574,6 @@
 
         return $deck_sum['restdeck'] ;
     }
-
     function shuffle_draw_p2(){
         if(count_deck_p2() < 5){
             $game_id = check_game_id();
@@ -602,10 +590,6 @@
         }
 
     }
-
-
-
-
     function card() {
     $sql_draw = 
         'SELECT 
@@ -663,11 +647,6 @@
     }
     
 }
-function cardClicked() {
-    echo "Karte wurde angeklickt!";
-    }
-
-
     function draw(){
         $game_id = check_game_id();
         $sql_turn = 
@@ -691,8 +670,6 @@ function cardClicked() {
             shuffle_draw_p2();
         }
     }
-
-
     function healthbar($player){
         $sql = "SELECT p1_health, p2_health FROM game_sessions WHERE game_id = 1;";
         $result = mysqli_query(sqlconnect(), $sql);
@@ -705,14 +682,6 @@ function cardClicked() {
         $health = mysqli_fetch_array($result);
         return $health[$player];
     }
-
-
-
-
-
-
-
-
     function check_game_id(){ //test id generieren
         return 1;
     }

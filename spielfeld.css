@@ -6,16 +6,28 @@ body {
     
     margin: 0;
     padding: 0;
-    background-image: url('https://img.freepik.com/fotos-kostenlos/ein-gemaelde-eines-bergsees-mit-einem-berg-im-hintergrund_188544-9126.jpg?t=st=1737040155~exp=1737043755~hmac=9fc4ec571f052549472877225fb29dfa10d609cbcf5a91223ffba407bc289bed&w=1380'); /* Pfad zum Hintergrundbild */
+    background-image: url('vec.jpg');
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat; 
     background-attachment: fixed; 
 }
 
+.spiel *{
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+}
 
 .spiel{
     width: 100%;
+    
+}
+.zugnummer{
+    font-size: 28px;
+}
+
+.zugbutton > input{
+    border: 5px black solid;
+    background-color: rgba(0, 0, 0, 1);
 }
 
 .grid-container {
@@ -36,6 +48,9 @@ body {
 
 
 .health{
+    position: relative;
+    bottom: -8px;
+
     width: 100%;
     height: 50%;
     border: 2px black solid;

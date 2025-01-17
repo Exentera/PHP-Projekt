@@ -4,7 +4,6 @@
   close_header();
   generate_navbar();
 ?>
-
   <main>
     <h2>Lorem.</h2>
     <section>
@@ -46,11 +45,11 @@
     </section>
 
 
-    <div class="cards">
+    <!-- <div class="cards">
       <div class="card">div card 1</div>
       <div class="card">div card 2</div>
       <div class="card">div card 4</div>
-    </div>
+    </div> -->
 
           <section>
       <article>
@@ -90,7 +89,6 @@
       </article>
 
   </main>
-
 <?php
   generate_footer();
   close_html();
